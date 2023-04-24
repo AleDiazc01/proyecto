@@ -47,14 +47,25 @@ public class ReporteController {
         return "/reportes/principal";
     }
     
-    @GetMapping("/clientes")
-    public ResponseEntity<Resource> reporteClientes(@RequestParam String tipo) throws IOException {
+    @GetMapping("/recetas")
+    public ResponseEntity<Resource> reporteRecetas(@RequestParam String tipo) throws IOException {
         //Por desarrollar
         
         //Acá se definen los parámetros que se pasan al reporte
         Map<String, Object> parametros = new HashMap();
-        parametros.put("titulo", "Ismael");
-        var reporte="clientes";
+        parametros.put("titulo", "receta");
+        var reporte="recetas";
+        return reportePrivado(reporte, parametros, tipo);
+    }
+   
+    @GetMapping("/comentarios")
+    public ResponseEntity<Resource> reporteComentarios(@RequestParam String tipo) throws IOException {
+        //Por desarrollar
+        
+        //Acá se definen los parámetros que se pasan al reporte
+        Map<String, Object> parametros = new HashMap();
+        parametros.put("titulo", "comentario");
+        var reporte="comentarios";
         return reportePrivado(reporte, parametros, tipo);
     }
     /*

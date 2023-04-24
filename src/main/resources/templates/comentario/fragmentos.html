@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>TechShop</title>
+    </head>
+    <body>
+
+
+
+
+        <!-- 3 Sección principal para mostrar la informacion de la entidad cliente -->
+        <section th:fragment="listadoComentario" id="comentarios">
+            <div class="container">
+                <div class="row row-cols-2" >
+                    <h2 class="inline">[[#{index.nuestrosArticulos}]]</h2>
+                    <div id="resultsBlock">
+                    </div>
+                </div>
+                <div class="row row-cols-3" 
+                     th:if="${comentarios != null and !comentarios.empty}">
+
+                    <div class="card" th:each="comentario : ${comentarios}">
+
+                        <div class="card-body">
+                            <h6 class="card-title">[[${comentario.cliente.nombre}]] [[${comentario.cliente.apellidos}]]</h3>
+                            <p class="card-title">[[${comentario.texto}]]<p/>
+
+                            <form>
+                                <input type="hidden" name="texto" th:value="${comentario.idComentario}"/>
+                            </form>
+
+
+                        </div>
+                    </div>
+                    
+                    
+                                            
+</div>
+                <div th:if="${comentarios == null or comentarios.empty}">
+                </div>
+            </div>
+        </section>
+
+       
+<!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarComentario">
+                            <i class="fas fa-plus"></i> Agregar Comentario
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2 Fragmento para agregar categoria, es la ventana modal -->
+        <section th:fragment="agregarComentario">
+            <div id="agregarComentario" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">[[#{cliente.agregar}]]</h5>
+                            <button type="button" 
+                                    class="btn-close" 
+                                    data-bs-dismiss="modal" 
+                                    aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/comentario/guardar}" th:object="${comentario}"
+                              method="POST" class="was-validated">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="texto">[[#{comentario.texto}]]</label>
+                                    <input type="text" class="form-control" name="texto" required="true">
+                                </div>    
+                                <div class="mb-3">
+                                    <label for="idCliente">[[#{comentario.texto}]]</label>
+                                    <input type="text" class="form-control" name="cliente.idCliente" required="true">
+                                </div>  
+                                <div class="mb-3">
+                                    <label for="idReceta">[[#{comentario.texto}]]</label>
+                                    <input type="text" class="form-control" name="receta.idReceta" required="true">
+                                </div>  
+                            </div>
+                            <div class="modal-footer" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <button class="btn btn-primary" type="submit">[[#{accion.agregar}]]</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 Sección principal para mostrar la informacion de la entidad categoria -->
+        <section th:fragment="listadoComentarioAdm" id="comentarios">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Listado de Comentario</h4></div>
+                            <div th:if="${comentarios != null and !comentarios.empty}">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                        <tr><th>#</th>
+                                            <th>texto</th>
+                                            <th></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="comentario, contador : ${comentarios}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${comentario.texto}]]</td>
+
+                                            <td><a th:href="@{/comentario/eliminar/}+${comentario.idComentario}"
+                                                   class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> Eliminar</a>
+                                                <a th:href="@{/comentario/modificar/}+${comentario.idComentario}"
+                                                   class="btn btn-success">
+                                                    <i class="fas fa-pencil"></i> Modificar</a></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${comentarios == null or comentarios.empty}">
+                                <span>Lista vacía</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-success text-white mb-3">
+                            <div class="card-body">
+                                <h3>Total comentarios</h3>
+                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${totalComentarios}]]</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+               <!-- 4 Fragmento que se utiliza en la página modifca.html -->
+        <section th:fragment="editarComentario">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST"
+                          th:action="@{/comentario/guardar}" th:object="${comentario}"
+                          class="was-validated">
+                        <input type="hidden" name="idComentario" th:field="*{idComentario}"/>
+                        <section th:replace="~{comentario/fragmentos :: botonesEditar}"/>
+                        <div id=details>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>[[#{accion.actualizar}]]</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <label for="texto">[[#{cliente.nombre}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="texto" th:field="*{texto}"
+                                                           required="true">
+                                                </div>                                                                                              
+                                           
+                                                <div class="mb-3">
+                                                    <label for="idCliente">[[#{cliente.nombre}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="idCliente" th:field="*{cliente.idCliente}"
+                                                           required="true">
+                                            </div>
+                                                <div class="mb-3">
+                                                    <label for="idReceta">[[#{cliente.nombre}]]</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="idReceta" th:field="*{receta.idReceta}"
+                                                           required="true">
+                                                </div>                                                                                              
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
+        <section th:fragment="botonesEditar">
+            <div class="container py-4 mb-4 bg-light">
+                <div class="row">
+                    <div class="col-md-4 d-grid">
+                        <a th:href="@{/comentario/mostrarAdmin}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">                                
+                        <a th:href="@{/comentario/eliminar/}+${comentario.idComentario}"
+                           class="btn btn-danger">
+                            <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i> [[#{accion.guardar}]]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </body>
+</html>

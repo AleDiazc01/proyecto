@@ -20,6 +20,8 @@ public class Receta implements Serializable{
     private String descripcion;
     private String ingredientes;
     private String preparacion;
+    private String imagen;
+
     @JoinColumn(name="id_cliente", referencedColumnName = "id_cliente")
     @ManyToOne
     private Cliente cliente;
@@ -27,11 +29,13 @@ public class Receta implements Serializable{
     public Receta() {
     }
 
-    public Receta(String nombre, String descripcion, String ingredientes, String preparacion) {
+    public Receta(String nombre, String descripcion, String ingredientes, String preparacion,String imagen) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.ingredientes = ingredientes;
         this.preparacion = preparacion;
+        this.imagen = imagen;
+
     }
 
 }

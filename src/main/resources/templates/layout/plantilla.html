@@ -23,13 +23,10 @@
                                 <a class="nav-menu-link nav-link" th:href="@{/cliente/listado}">[[#{plantilla.clientes}]]</a>
                             </li>
                             <li class="nav-item px-2">
-                                <a class="nav-menu-link nav-link" th:href="@{/categoria/listado}">[[#{plantilla.categorias}]]</a>
+                                <a class="nav-menu-link nav-link" th:href="@{/receta/mostrarAdmin}">[[#{plantilla.categorias}]]</a>
                             </li>
                             <li class="nav-item px-2">
-                                <a class="nav-menu-link nav-link" th:href="@{/articulo/listado}">[[#{plantilla.articulos}]]</a>
-                            </li>
-                            <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')">
-                                <a class="nav-menu-link nav-link" th:href="@{/articulo/listado}">[[#{plantilla.admin}]]</a>
+                                <a class="nav-menu-link nav-link" th:href="@{/comentario/mostrarAdmin}">[[#{plantilla.articulos}]]</a>
                             </li>
                             <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')">
                                 <a class="nav-menu-link nav-link" th:href="@{/reportes/principal}">Reportes</a>
@@ -52,7 +49,7 @@
                         </ul>
                         <ul class="navbar-nav" sec:authorize="isAuthenticated()">
                             <li class="nav-item text-white my-auto">
-                                <i class='fas fa-user'></i> <span sec:authentication='name'>Juan</span>
+                                <i class='fas fa-user'></i> <span sec:authentication='name'>1</span>
                             </li>
                             <li class="nav-item my-auto">
                                 <form method="post" th:action="@{/logout}">

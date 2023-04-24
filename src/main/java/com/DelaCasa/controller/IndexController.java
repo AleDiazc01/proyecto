@@ -1,7 +1,7 @@
 package com.DelaCasa.controller;
 
-import com.DelaCasa.domain.Cliente;
-import com.DelaCasa.service.ArticuloService;
+import com.DelaCasa.domain.Receta;
+import com.DelaCasa.service.RecetaService;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class IndexController {
 
     @Autowired
-    private ArticuloService articuloService;
+    private RecetaService recetaService;
 
     @GetMapping("/")
     public String inicio(Model model) {
-        var articulos = articuloService.getArticulos(true);
-        model.addAttribute("articulos", articulos);
+        var recetas = recetaService.getRecetas();
+        model.addAttribute("recetas", recetas);
         return "index";
+        
 
     }
 

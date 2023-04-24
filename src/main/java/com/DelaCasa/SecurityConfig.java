@@ -59,7 +59,19 @@ public class SecurityConfig {
                                 "/errores/**",
                                 "/carrito/**",
                                 "/reportes/**",
-                                "/webjars/**").permitAll()
+                                "/webjars/**",
+                                "/receta/mostrar/**",
+                                "/receta/**",
+                                "/comentario/listado",
+                                "/receta/mostrarAdmin",
+                                "/receta/eliminar/**",
+                                "/receta/modificar/**",
+                                "/receta/guardar",
+                                "/comentario/mostrarAdmin",
+                                "/comentario/nuevo",
+                                "/comentario/guardar",
+                                "/comentario/eliminar/**",
+                                "/comentario/modificar/**").permitAll()
                         .requestMatchers(
                                 "/articulo/nuevo",
                                 "/articulo/guardar",

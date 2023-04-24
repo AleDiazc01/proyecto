@@ -18,12 +18,13 @@ public class Comentario implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_comentario")
     private long idComentario;
-    private long idCliente;
-    private long idReceta;
     private String texto;
     @JoinColumn(name="id_receta", referencedColumnName = "id_receta")
     @ManyToOne
     private Receta receta;
+    @JoinColumn(name="id_cliente", referencedColumnName = "id_cliente")
+    @ManyToOne
+    private Cliente cliente;
     
     public Comentario( String texto) {
         this.texto = texto;
