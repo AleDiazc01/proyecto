@@ -58,7 +58,12 @@ public class SecurityConfig {
                                 "/reportes/**",
                                 "/webjars/**",
                                 "/receta/mostrar/**",
-                                "/receta/**",
+                                "/receta/**"
+                                ).permitAll()
+                        .requestMatchers(
+                                "/reportes/**"
+                                ).hasRole("ADMIN")
+                        .requestMatchers(
                                 "/comentario/listado",
                                 "/receta/mostrarAdmin",
                                 "/receta/eliminar/**",
@@ -68,29 +73,14 @@ public class SecurityConfig {
                                 "/comentario/nuevo",
                                 "/comentario/guardar",
                                 "/comentario/eliminar/**",
-                                "/comentario/modificar/**").permitAll()
-                        .requestMatchers(
-                                "/articulo/nuevo",
-                                "/articulo/guardar",
-                                "/articulo/modificar/**",
-                                "/articulo/eliminar/**",
-                                "/categoria/nuevo",
-                                "/categoria/guardar",
-                                "/categoria/modificar/**",
-                                "/categoria/eliminar/**",
+                                "/comentario/modificar/**",
                                 "/cliente/nuevo",
                                 "/cliente/guardar",
                                 "/cliente/modificar/**",
                                 "/cliente/eliminar/**",
-                                "/reportes/**"
-                                ).hasRole("ADMIN")
-                        .requestMatchers(
-                                "/articulo/listado",
-                                "/categoria/listado",
                                 "/cliente/listado"
-                        ).hasAnyRole("ADMIN","VENDEDOR")
-                        .requestMatchers("/facturar/carrito")
-                            .hasRole("USER")
+                        ).hasAnyRole("ADMIN","MAESTRO")
+                        
                 )
                 .formLogin((form) -> form
                 .loginPage("/login").permitAll())

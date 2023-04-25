@@ -10,17 +10,16 @@
         <div class="container py-4 mb-2">
             <div class="row"></div>
             <div class="row row-cols-6" >
-                <a th:href="@{/}" class="btn btn-primary">
+                <a th:href="@{/}" class="btn btn-primary" style="background-color: #cc8c9d">
                     <i class='fas fa-reply'></i> [[#{accion.regresar}]]</a>
             </div>
             <br/>
-            <div class="row"></div>
-            <div class="row row-cols-1">
+            <div class="row row-cols-3">
                 <div class="card" style="background-color: #f3a0b6">
                     <div class="card-header text-center" style="background-color: #cc8c9d">
-                        <b> Reporte Recetas<b/>
+                        <b>[[#{reporte.recetas}]]<b/>
                     </div>
-                    <div class="card-body row-cols-5">
+                    <div class="card-body row-cols-12">
                         <a th:href="@{/reportes/recetas?tipo=vPdf}" class="btn btn-primary">
                             <i class='fas fa-eye'></i><i class='fas fa-file-pdf'></i>
                         </a>
@@ -35,12 +34,16 @@
                         </a>
                     </div>
                 </div>
-               
+                </div>
+            <br/>
+                        <br/>
+
+               <div class="row row-cols-3">
                 <div class="card"style="background-color: #f3a0b6">
                     <div class="card-header text-center" style="background-color: #cc8c9d">
-                        <b>  Reporte Comentarios<b/>
+                        <b>[[#{reporte.comentarios}]]<b/>
                     </div>
-                    <div class="card-body row-cols-5">
+                    <div class="card-body row-cols-12">
                         <a th:href="@{/reportes/comentarios?tipo=vPdf}" class="btn btn-primary">
                             <i class='fas fa-eye'></i><i class='fas fa-file-pdf'></i>
                         </a>
@@ -57,6 +60,9 @@
                 </div>                
             </div>
         </div>
+                    <br/>
+            <br/>
+
 
         <footer th:replace="~{layout/plantilla :: footer}"/>         
     </body>

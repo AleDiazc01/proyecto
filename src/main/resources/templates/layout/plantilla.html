@@ -19,7 +19,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav" sec:authorize="hasRole('ROLE_ADMIN') OR hasRole('ROLE_VENDEDOR')">
+                        <ul class="navbar-nav" sec:authorize="hasRole('ROLE_ADMIN') OR hasRole('ROLE_MAESTRO')">
                             <li class="nav-item px-2">
                                 <a class="nav-menu-link nav-link" th:href="@{/cliente/listado}">[[#{plantilla.clientes}]]</a>
                             </li>
