@@ -1,9 +1,7 @@
 package com.DelaCasa.service.impl;
 
 import com.DelaCasa.dao.ClienteDao;
-import com.DelaCasa.dao.CreditoDao;
 import com.DelaCasa.domain.Cliente;
-import com.DelaCasa.domain.Credito;
 import com.DelaCasa.service.ClienteService;
 
 import java.util.List;
@@ -18,8 +16,6 @@ public class ClienteServicesImpl implements ClienteService {
     @Autowired
     private ClienteDao clienteDao;
 
-    @Autowired
-    private CreditoDao creditoDao;
 
     @Override
     @Transactional(readOnly = true)
@@ -36,9 +32,7 @@ public class ClienteServicesImpl implements ClienteService {
     @Override
     @Transactional()
     public void save(Cliente cliente) {
-        Credito credito = cliente.getCredito();
-        credito = creditoDao.save(credito);
-        cliente.setCredito(credito);
+        
         clienteDao.save(cliente);
     }
 

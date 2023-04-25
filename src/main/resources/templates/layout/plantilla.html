@@ -1,17 +1,18 @@
 <!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">    
     <head th:fragment="head">
-    <title>TechShop</title>
+    <title>DelaCasa</title>
     <meta charset="UTF-8"/>
     <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    
     </head>    
     <body>        
         <header th:fragment="header" class="header">
-            <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-success p-0">
                 <div class="container">
                     <a th:href="@{/}" class="navbar-brand">[[#{aplicacion.titulo}]]</a>
                     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -23,13 +24,13 @@
                                 <a class="nav-menu-link nav-link" th:href="@{/cliente/listado}">[[#{plantilla.clientes}]]</a>
                             </li>
                             <li class="nav-item px-2">
-                                <a class="nav-menu-link nav-link" th:href="@{/receta/mostrarAdmin}">[[#{plantilla.categorias}]]</a>
+                                <a class="nav-menu-link nav-link" th:href="@{/receta/mostrarAdmin}">[[#{plantilla.recetas}]]</a>
                             </li>
                             <li class="nav-item px-2">
-                                <a class="nav-menu-link nav-link" th:href="@{/comentario/mostrarAdmin}">[[#{plantilla.articulos}]]</a>
+                                <a class="nav-menu-link nav-link" th:href="@{/comentario/mostrarAdmin}">[[#{plantilla.comentarios}]]</a>
                             </li>
                             <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')">
-                                <a class="nav-menu-link nav-link" th:href="@{/reportes/principal}">Reportes</a>
+                                <a class="nav-menu-link nav-link" th:href="@{/reportes/principal}">[[#{plantilla.reportes}]]</a>
                             </li>
                         </ul>
                     </div>
@@ -51,10 +52,11 @@
                             <li class="nav-item text-white my-auto">
                                 <i class='fas fa-user'></i> <span sec:authentication='name'>1</span>
                             </li>
-                            <li class="nav-item my-auto">
+                            
+                            <li class="nav-item my-auto" >
                                 <form method="post" th:action="@{/logout}">
-                                    <button class="btn btn-dark">
-                                        <i class="fas fa-sign-out-alt"></i>
+                                    <button class="btn btn-success">
+                                        <i class="fas fa-sign-out"></i>
                                     </button>
                                 </form>
                             </li>
@@ -62,12 +64,16 @@
                     </div>
                 </div>
             </nav>
-            <section id="main-header" class="py-2 bg-info text-white">
+            <section id="main-header" class="py-2 bg-dark text-white">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
                             <h1>
-                                <i class="fas fa-cog"></i>[[#{plantilla.suTienda}]]
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-box2-heart" viewBox="0 0 16 16">
+  <path d="M8 7.982C9.664 6.309 13.825 9.236 8 13 2.175 9.236 6.336 6.31 8 7.982Z"/>
+  <path d="M3.75 0a1 1 0 0 0-.8.4L.1 4.2a.5.5 0 0 0-.1.3V15a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V4.5a.5.5 0 0 0-.1-.3L13.05.4a1 1 0 0 0-.8-.4h-8.5Zm0 1H7.5v3h-6l2.25-3ZM8.5 4V1h3.75l2.25 3h-6ZM15 5v10H1V5h14Z"/>
+</svg>
+                                <i></i>[[#{plantilla.descripcion}]]
                                 
                             </h1>
                         </div>
@@ -75,7 +81,7 @@
                 </div>
             </section>
         </header>
-        <footer th:fragment="footer" class="bg-warning text-white mt-5 p-2">
+        <footer th:fragment="footer" class="bg-success text-white mt-0 p-2">
             <div class="container">
                 <div class="col">
                     <p class="lead text-center">

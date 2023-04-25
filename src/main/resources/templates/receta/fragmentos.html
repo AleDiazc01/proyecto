@@ -2,23 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>TechShop</title>
+        <title>DelaCasa</title>
     </head>
     <body>
-        <section th:fragment="listadoIndex" id="recetas">
+        <section th:fragment="listadoIndex" id="recetas" style="background-color: #f6f4e0">
             <div class="container">
                 <div class="row row-cols-2" >
-                    <h2 class="inline">[[#{index.nuestrosArticulos}]]</h2>
+                    <h2 class="inline">[[#{index.nuestrasRecetas}]]</h2>
                     <div id="resultsBlock">
                     </div>
                 </div>
-                <div class="row row-cols-3" 
+                <div class="row row-cols-3 " 
                      th:if="${recetas != null and !recetas.empty}">
 
-                    <div class="card" th:each="receta : ${recetas}">
-                        <a style="color: black; text-align:center " class="" th:href="@{/receta/mostrar/} +${receta.idReceta}">
+                    <div class="card" style="background-color: #dbe4d9"th:each="receta : ${recetas}">
 
                         <div class="card-body">
+                                                    <a style="color: black; text-align:center " class="" th:href="@{/receta/mostrar/} +${receta.idReceta}">
+
                             <h3 class="card-title">[[${receta.nombre}]]</h3>
                             <img th:src="${receta.imagen}" width="250"/>                                        
 
@@ -32,11 +33,12 @@
                                 <input type="hidden" name="texto" th:value="${receta.idReceta}"/>
                                 
                             </form>
-                            <p class="card-text">-Publicado por: [[${receta.cliente.nombre}]] [[${receta.cliente.apellidos}]]</p>    
+                                                       
 
+                           </a>                      
+                            <p class="card-text">[[#{receta.publicadox}]][[${receta.cliente.nombre}]] [[${receta.cliente.apellidos}]]</p>    
 
                         </div>
-                                                 </a>
                     </div>
                          
                 </div>
@@ -45,23 +47,27 @@
                 <div th:if="${recetas == null or recetas.empty}">
                 </div>
             </div>
+                        <br/>
+
         </section>
 
-        <section th:fragment="mostrarReceta">
+        <section th:fragment="mostrarReceta"style="background-color: #f6f4e0">
             <div class="container">
                 <div class="row row-cols-2" >
-                    <h2 class="inline">[[#{index.nuestrosArticulos}]]</h2>
+                    <h2 class="inline">[[#{receta.infoReceta}]]</h2>
                     <div id="resultsBlock">
                     </div>
                 </div>
                 <div class="row row-cols-2" >
-                    <div class="card" th:object="${receta}">
+                    <div class="card" th:object="${receta}"style="background-color: #dbe4d9">
                         
                         <div class="card-body">
                             <h3 class="card-title">[[${receta.nombre}]]</h3>
                             <br/>                            
                             <h4 class="card-title">
                                     [[${receta.descripcion}]]
+                                     <br/>   
+                                      <br/> 
                                 </h4>
                             <h6 class="card-title">
                                     [[${receta.ingredientes}]]
@@ -77,11 +83,18 @@
                     </div>
                
                 <div class="row row-cols-1" >
-                    <div class="card" th:object="${receta}">
+                    <div class="card" th:object="${receta}"style="background-color: #dbe4d9">
                         
                         <div class="card-body">
                         <img th:src="${receta.imagen}" width="400"/>                                        
-                        <p class="card-text">Publicado por: [[${receta.cliente.nombre}]] [[${receta.cliente.apellidos}]]</p>    
+                        <p class="card-text">[[#{receta.publicadox}]]<b>[[${receta.cliente.nombre}]] [[${receta.cliente.apellidos}]]</b></p> 
+                        <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mailbox" viewBox="0 0 16 16">
+  <path d="M4 4a3 3 0 0 0-3 3v6h6V7a3 3 0 0 0-3-3zm0-1h8a4 4 0 0 1 4 4v6a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V7a4 4 0 0 1 4-4zm2.646 1A3.99 3.99 0 0 1 8 7v6h7V7a3 3 0 0 0-3-3H6.646z"/>
+  <path d="M11.793 8.5H9v-1h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.354-.146l-.853-.854zM5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0z"/>
+</svg>[[${receta.cliente.correo}]]</p>                                                                                                                      
+                                                    <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+  <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+</svg>[[${receta.cliente.telefono}]]</p> 
 
                         </div>
                     </div>
@@ -90,61 +103,9 @@
                 </div>
             </div>
                  </div>
+            
         </section>
         
-
-
-  
-        <!-- 3 Sección principal para mostrar la informacion de la entidad receta -->
-        <section th:fragment="listadoRecetas" id="recetas">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Listado de Recetas</h4></div>
-                            <div th:if="${recetas != null and !recetas.empty}">
-                                <table class="table table-striped table-hover">
-                                    <thead class="table-dark">
-                                        <tr><th>#</th>
-                                            <th>nombre</th>
-                                            <th>descripcion</th>
-                                            <th>ingredientes</th>
-                                            <th>preparacion</th>
-                                            <th></th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="receta, contador : ${recetas}">
-                                            <td>[[${contador.count}]]</td>
-                                            <td>[[${receta.nombre}]]</td>
-                                            <td>[[${receta.descripcion}]]</td>
-                                            <td>[[${receta.ingredientes}]]</td>
-                                            <td>[[${receta.preparacion}]]</td>
-                                            <td><a th:href="@{/receta/eliminar/}+${receta.idReceta}"
-                                                   class="btn btn-danger">
-                                                    <i class="fas fa-trash"></i> Eliminar</a>
-                                                <a th:href="@{/receta/modificar/}+${receta.idReceta}"
-                                                   class="btn btn-success">
-                                                    <i class="fas fa-pencil"></i> Modificar</a></td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="text-center p-2" th:if="${recetas == null or recetas.empty}">
-                                <span>Lista vacía</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card text-center bg-success text-white mb-3">
-                            <div class="card-body">
-                                <h3>Total Recetas</h3>
-                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${totalRecetas}]]</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- 4 Fragmento que se utiliza en la página modifca.html -->
         <section th:fragment="editarReceta">
@@ -161,42 +122,45 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="card">
-                                            <div class="card-header">
+                                            <div class="card-header" style="background-color: #76bc88">
                                                 <h4>[[#{accion.actualizar}]]</h4>
                                             </div>
-                                            <div class="card-body">
+                                            <div class="card-body" style="background-color: #cdf0d6">
                                                 <div class="mb-3">
                                                     <label for="nombre">[[#{receta.nombre}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="nombre" th:field="*{nombre}"
-                                                           required="true">
+                                                           required="true"style="background-color: #ecfef1">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="descripcion">[[#{receta.descripcion}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
-                                                           required="true">
+                                                           required="true"style="background-color: #ecfef1">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="ingredientes">[[#{receta.ingredientes}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="ingredientes" th:field="*{ingredientes}"
-                                                           required="true">
+                                                           required="true"style="background-color: #ecfef1">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="preparacion">[[#{receta.preparacion}]]</label>
                                                     <input type="text" class="form-control" 
-                                                           name="preparacion" th:field="*{preparacion}">
+                                                           name="preparacion" th:field="*{preparacion}"
+                                                           required="true"style="background-color: #ecfef1">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="imagen">[[#{receta.imagen}]]</label>
                                                     <input type="text" class="form-control" 
-                                                           name="imagen" th:field="*{imagen}">
+                                                           name="imagen" th:field="*{imagen}"
+                                                           required="true"style="background-color: #ecfef1">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="idCliente">[[#{cliente.idCliente}]]</label>
                                                     <input type="text" class="form-control" 
-                                                           name="idCliente" th:field="*{cliente.idCliente}">
+                                                           name="idCliente" th:field="*{cliente.idCliente}"
+                                                           required="true"style="background-color: #ecfef1">
                                                 </div>
                                             </div>
                                         </div>
@@ -205,12 +169,14 @@
                             </div>
                     </form>
                 </div>
+                                        <br/>
+
             </div>
         </section>
 
         <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
         <section th:fragment="botonesEditar">
-            <div class="container py-4 mb-4 bg-light">
+            <div class="container py-4 mb-0" style="background-color: #c8e1cf">
                 <div class="row">
                     <div class="col-md-4 d-grid">
                         <a th:href="@{/receta/mostrarAdmin}" class="btn btn-primary">
@@ -235,7 +201,7 @@
 </html>
 
 <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
-        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+        <section th:fragment="botonesAgregar" class="py-4 mb-4">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">   
@@ -260,39 +226,39 @@
                  aria-hidden="true">
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
-                        <div class="modal-header bg-info text-white">
+                        <div class="modal-header text-white" style="background-color: #85c395">
                             <h5 class="modal-title">[[#{cliente.agregar}]]</h5>
                             <button type="button" 
                                     class="btn-close" 
                                     data-bs-dismiss="modal" 
                                     aria-label="Close"></button>
                         </div> 
-                        <form th:action="@{/receta/guardar}" th:object="${receta}"
+                        <form th:action="@{/receta/guardar}" th:object="${receta}" style="background-color: #d1e9d7"
                               method="POST" class="was-validated">
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="nombre">[[#{cliente.nombre}]]</label>
-                                    <input type="text" class="form-control" name="nombre" required="true">
+                                    <input type="text" class="form-control" name="nombre" required="true" style="background-color:  #e5fceb">
                                 </div>
                                 <div class="mb-3">
                                     <label for="descripcion">[[#{cliente.apellidos}]]</label>
-                                    <input type="text" class="form-control" name="descripcion" required="true">
+                                    <input type="text" class="form-control" name="descripcion" required="true"style="background-color:  #e5fceb">
                                 </div>
                                 <div class="mb-3">
                                     <label for="ingredientes">[[#{cliente.correo}]]</label>
-                                    <input type="text" class="form-control" name="ingredientes" required="true">
+                                    <input type="text" class="form-control" name="ingredientes" required="true"style="background-color:  #e5fceb">
                                 </div>
                                 <div class="mb-3">
                                     <label for="preparacion">[[#{cliente.telefono}]]</label>
-                                    <input type="text" class="form-control" name="preparacion">
+                                    <input type="text" class="form-control" name="preparacion"required="true"style="background-color:  #e5fceb">
                                 </div>
                                 <div class="mb-3">
                                     <label for="imagen">[[#{cliente.telefono}]]</label>
-                                    <input type="text" class="form-control" name="imagen">
+                                    <input type="text" class="form-control" name="imagen"required="true"style="background-color:  #e5fceb">
                                 </div>
                                 <div class="mb-3">
                                     <label for="idCliente">[[#{cliente.telefono}]]</label>
-                                    <input type="number" class="form-control" name="cliente.idCliente">
+                                    <input type="number" class="form-control" name="cliente.idCliente"required="true"style="background-color:  #e5fceb">
                                 </div>
                             </div>
                             <div class="modal-footer" sec:authorize="hasRole('ROLE_ADMIN')">
@@ -310,9 +276,9 @@
                 <div class="row">
                     <div class="col-md-9">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header"style="background-color:  #76bc88">
                                 <h4>Listado de Receta</h4></div>
-                            <div th:if="${recetas != null and !recetas.empty}">
+                            <div th:if="${recetas != null and !recetas.empty}" style="background-color: #eafdef">
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark">
                                         <tr><th>#</th>
@@ -352,6 +318,7 @@
                         </div>
                     </div>
                 </div>
+                <br/>
             </div>
         </section>
 

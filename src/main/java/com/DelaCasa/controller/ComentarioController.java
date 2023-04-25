@@ -20,16 +20,7 @@ public class ComentarioController {
     @Autowired
     private ComentarioService comentarioService;
 
-    @GetMapping("/listado")
-    public String inicio(Model model) {
-        var comentarios = comentarioService.getComentarios();
-        model.addAttribute("comentarios", comentarios);
-        model.addAttribute("totalComentarios", comentarios.size());
-
- 
-        return "comentario/listado";
-
-    }
+   
     
         @GetMapping("/mostrarAdmin")
     public String mostrarComentarioAdmin(Model model) {

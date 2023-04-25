@@ -25,16 +25,7 @@ public class RecetaController {
     @Autowired
     private RecetaService recetaService;
 
-    @GetMapping("/listado")
-    public String inicio(Model model) {
-        var recetas = recetaService.getRecetas();
-        model.addAttribute("recetas", recetas);
-        model.addAttribute("totalRecetas", recetas.size());
-        
- 
-        return "receta/listado";
-
-    }
+    
         @GetMapping("/mostrarAdmin")
     public String mostrarRecetaAdmin(Model model) {
         var recetas = recetaService.getRecetas();
